@@ -10,4 +10,19 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+export const getProfile = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const user = await userService.getUserById(req.userId!);
+    if (!user) {
+      res.status(404).json({ message: 'Usuario no encontrado' });
+      return;
+    }
+    res.json({ user: { id: user._id, username: user.username, email: user.email } });
+  } catch (error) {
+    res.status(500).json({ message: 'Error en el servidor', error });
+  }
+};
+
 // Añadiremos más funciones según sea necesario
+
+
