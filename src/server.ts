@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 import userRoutes from './routes/userRoutes'
+import accountRoutes from './routes/accountRoutes'
 
 const app = express();
 
@@ -13,9 +14,9 @@ app.use(express.json());
 
 connectDB();
 
-// Aquí irán las rutas
 app.use('/api/users', userRoutes);
+app.use('/api/accounts', accountRoutes);
 
-
-
-app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
+});
